@@ -38,14 +38,14 @@ public function store(Request $request)
     ]);
     
     $avatarFileName = ...;    
-    \Storage::disk('s3')->put(
+    Storage::disk('s3')->put(
         $avatarFileName, $request->file('avatar'));
     
     $user = new User($request->except('avatar'));
     $user->avatarUrl = $avatarFileName;
     $user->save();
         
-    \Email::send($user, 'Hi email');
+    Email::send($user, 'Hi email');
     
     return redirect()->route('users');
 }
